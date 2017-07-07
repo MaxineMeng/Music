@@ -1,0 +1,47 @@
+一.复习
+
+二.模板加载配置
+	启动--->初始化(配置和运行)-->运行
+	使用config方法对模块的配置
+		(只有一个数组参数 里面包含依赖对象以及需要做的功能(function))
+	AngylaiJs中的服务绝大部分有一个对应的provider,
+		用来执行与之对应服务的功能或配置,比如:$filterProvider
+
+三.路由
+	SPA(single page Application)单页面应用
+		通过一个页面来展示所有功能,通过Ajax动态获取数据,然后进行实时渲染,结合css3动画模仿原生app
+	特点:
+		1.不会发生页面跳转
+		2.将若干功能集中至一个页面
+		3.动态生成数据,通过Ajax获取
+		4.增强性能,增强用户体验
+		5.模仿手机app交互
+	单页面进行的要求:
+		1.只有一个页面,但可以有多个视图
+		2.链接必须使用锚点
+
+	前端的路由是锚点,AngularJS对这个实现原理进行了封装,将锚点到变化封装成路由(route)
+
+	使用:
+		1.引入文件
+		2.创建应用时需要依赖路由ngRoute
+			var app = angular.module("app",["ngRoute"]);
+		3.对路由器进行配置
+			app.config(["$routeProvider",function($routeProvider){
+       			具体做的事
+       			通过$routeProvider的when方法对路由进行具体配置
+       			when方法里有两个参数:字符串 表示 url的hash值
+       			                     对象   用于 匹配当前路由参数.如视图/控制器等
+       			                       可以有的类型:
+       			                         template: 返回字符串
+       			                         redirectTo: 重定向,跳转到其他路由
+       			                         templateUrl:引入外部的视图
+       			                         controllor:视图模板所属的控制器名
+            }]);
+		4.在视图中写一个占位符ng-view
+			在需要展示数据的节点上添加ng-view属性
+			mg-view 只负责视图展示功能 不负责数据解析
+
+		5.路由的参数
+			获取:通过$routePramas
+	

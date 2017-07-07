@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>angularjs路由</title>
+        <script src="../lib/angular.min.js"></script>
+        <script src="../lib/angular-route.js"></script>
+
+    </head>
+    <body ng-app="app">
+    <div>
+	    <ul>
+	    	<li><a href="#first">登录</a></li>
+	    	<li><a href="#second">注册</a></li>
+	    	<li><a href="#third">第三个</a></li>
+	    </ul>
+		<div ng-view>
+			<!-- ng-view是一个视图模块的指令，指定返回的数据在该指令所在节点显示，也可以称为布局模板，路由匹配的数据（视图）会被加载渲染到该区域； -->
+		</div>
+	</div>
+    </body>
+    <script>
+    	// 声明 app应用时需要用到路由，所以在数组里添加路由的依赖
+    	var app = angular.module("app",["ngRoute"]);
+    	app.controller("myCtrl",["$scope",function($scope){
+    		$scope.names = ["张三","李四","王五","赵六"]
+    	}]);
+    	// 使用路由之前，需要对路由进行配置
+    	app.config(["$routeProvider",function($routeProvider){
+    		$routeProvider.when("/",{
+    			template:"<h1>这是首页的内容</h1>"
+    		}).when("/first",{
+    			template:"<h1>这是第一个</h1>"
+    		}).when("/second",{
+    			templateUrL:"templateUrl.html",
+    			controller:"myCtrl"
+    		}).when("/third",{
+    			templateUrl:"example.html"
+    		}).otherwise({
+    			// template:"<h1>地址错误</h1>"
+    			// 重定向，用于路由的跳转
+    			redirectTo:"/"
+    		})
+    	}]);
+    </script>
+</html>
+
